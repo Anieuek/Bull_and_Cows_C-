@@ -9,7 +9,7 @@ int main()
 	std::cout << "Can you guess the " << WORLD_LENGTH;
 	std::cout << " letter isogram I'm thinking of?\n";
 	std::cout << std::endl;
-	//costam
+
 	// get a guess from the player
 	std::cout << "Enter your guess: ";
 	std::string Guess = "";
