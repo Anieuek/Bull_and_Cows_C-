@@ -10,9 +10,14 @@ int main()
 {
 	PrintIntro();
 
-	GetGuessAndPrintBack();
-	GetGuessAndPrintBack();
-	
+	// loop for the number of turns asking for guesses
+	constexpr int NUMBER_OF_TURNS = 9;
+	for (int count = 1; count <= NUMBER_OF_TURNS; count++)
+	{
+		GetGuessAndPrintBack();
+		std::cout << std::endl;
+	}
+
 	std::cout << std::endl;
 	return 0;
 }
