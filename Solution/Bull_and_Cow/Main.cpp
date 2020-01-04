@@ -1,29 +1,47 @@
 #include <iostream>
 #include <string>
+#include "FBullCowGame.h"
 
 
 void PrintIntro();
-std::string GetGuessAndPrintBack();
+void Playgame();
+std::string GetGuess();
+bool AskToPlayAgain();
+
+FBullCowGame BCGame; //instantiate a new game
 
 //the entry point for my application
 int main()
 {
-	PrintIntro();
+	bool bWantsToPlayAgain = false;
+	do {
+		PrintIntro();
+		Playgame();
+		bWantsToPlayAgain = AskToPlayAgain();
+	} 
+	while (bWantsToPlayAgain);
+
+	return 0; //exit the application
+}
+
+void Playgame()
+{
+	
+	int MaxTries = BCGame.GetMaxTries();
+	std::cout << MaxTries << std::endl;
 
 	// loop for the number of turns asking for guesses
-	constexpr int NUMBER_OF_TURNS = 9;
-	for (int count = 1; count <= NUMBER_OF_TURNS; count++)
+	for (int count = 1; count <= MaxTries; count++)
 	{
-		GetGuessAndPrintBack();
+		std::string Guess = GetGuess();
+		std::cout << "Your guess was " << Guess << std::endl;
 		std::cout << std::endl;
 	}
-
-	std::cout << std::endl;
-	return 0;
 }
 
 // introduce the game
-void PrintIntro() {
+void PrintIntro() 
+{
 	constexpr int WORLD_LENGTH = 5;
 	std::cout << "Welcome to Bulls and Cows, a fun word game\n";
 	std::cout << "Can you guess the " << WORLD_LENGTH;
@@ -31,13 +49,23 @@ void PrintIntro() {
 	std::cout << std::endl;
 	return;
 }
-// get a guess from the player
-std::string GetGuessAndPrintBack() {
-	std::cout << "Enter your guess: ";
-	std::string Guess = "";
-	std::getline(std::cin, Guess);
+
+std::string GetGuess() 
+{
+	int CurrentTry = BCGame.GetCurrentTry();
 	
-	// print the guess back
-	std::cout << "Your guess was " << Guess << std::endl;
+	// get a guess from the player
+	std::cout << "Try" << CurrentTry << ". Enter your guess: ";
+	std::string Guess = "";
+	FBullCowGame BCGame;
+	std::getline(std::cin, Guess);
 	return Guess;
+}
+
+bool AskToPlayAgain()
+{
+	std::cout << "Do you want to play again (y/n)? ";
+	std::string Response = "";
+	std::getline(std::cin, Response);
+	return (Response[0] == 'y') || (Response[0] == 'Y');
 }
