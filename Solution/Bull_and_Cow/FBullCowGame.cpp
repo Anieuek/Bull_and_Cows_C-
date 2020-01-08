@@ -16,13 +16,13 @@ bool FBullCowGame::IsGameWon() const { return bGameIsWon; }
 
 int32 FBullCowGame::GetMaxTries() const 
 {
-	TMap<int32, int32> WordLengthToMaxTries{ {3,4}, {4,7}, {5,10}, {6,16}, {7,20} };
+	TMap<int32, int32> WordLengthToMaxTries{ {3,6}, {4,8}, {5,10}, {6,16}, {7,20} };
 	return WordLengthToMaxTries[MyHiddenWord.length()];
 }
 
 void FBullCowGame::Reset()
 {
-	const FString HIDDEN_WORD = "planet"; // thie must be isogram
+	const FString HIDDEN_WORD = "simple"; // thie must be isogram
 	MyHiddenWord = HIDDEN_WORD;
 
 	MyCurrentTry = 1;
